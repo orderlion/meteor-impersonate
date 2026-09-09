@@ -16,7 +16,8 @@ Package.onUse(function (api, where) {
 
   api.use([
     "random",
-    "alanning:roles",
+    "mongo",
+    "check",
   ]);
 
   api.addFiles([

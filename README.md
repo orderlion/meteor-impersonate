@@ -70,7 +70,7 @@ if (Impersonate.isActive()) {
 Server Methods
 -------
 
-By default, the package will grant users in the "admins" group (through alanning:roles) the possibility to impersonate other users. You can also set any of the two following parameters to define your own impersonation roles.
+By default, the package grants Orderlion admins (global `roleassignments` with `admin` roles) the possibility to impersonate other users. You can also set any of the two following parameters to define your own impersonation roles.
 
 - User role
 ``` javascript
@@ -121,5 +121,5 @@ Note that `Impersonate.checkAuth`, `Impersonate.beforeSwitchUser`, and `Imperson
 Notes
 -----
 
-- Default auth check uses alanning:roles. If the user trying to impersonate is not an admin, a server error will be returned.
+- Default auth check reads `roleassignments`. If the user trying to impersonate is not an admin, a server error will be returned.
 - Built upon [David Weldon](https://dweldon.silvrback.com/impersonating-a-user)'s post

@@ -1,7 +1,18 @@
+async function userIsInRoleAsync(userId, roles) {
+  if (!userId) return false;
+  const requested = [].concat(roles);
+  const db = MongoInternals.defaultRemoteCollectionDriver().mongo.db;
+  const doc = await db.collection('roleassignments').findOne({
+    userId,
+    'roles.name': { $in: requested }
+  });
+  return Boolean(doc);
+}
+
 const defaultAuthCheck = async function(fromUser, toUser) {
   // defaultAuthCheck
   if(fromUserId == toUserId) return true;
-  if(await Roles.userIsInRoleAsync(fromUserId, 'admin')) return true;
+  if(await userIsInRoleAsync(fromUserId, 'admin')) return true;
   throw new Meteor.Error(403, "You are not allowed to impersonate users!");
 };
 
@@ -15,9 +26,9 @@ Meteor.methods({
   async impersonate(params) {
     let fromUser, toUser;
     const currentUser = this.userId;
-    const byAdmin = await Roles.userIsInRoleAsync(currentUser, ['admin', 'admin-fr', 'admin-it', 'admin-es']);
-    const byOlProfessional = await Roles.userIsInRoleAsync(currentUser, 'olprofessional');
-    const bySupplier = await Roles.userIsInRoleAsync(currentUser, 'supplier');
+    const byAdmin = await userIsInRoleAsync(currentUser, ['admin', 'admin-fr', 'admin-it', 'admin-es']);
+    const byOlProfessional = await userIsInRoleAsync(currentUser, 'olprofessional');
+    const bySupplier = await userIsInRoleAsync(currentUser, 'supplier');
 
     check(currentUser, String);
     check(params, Object);
