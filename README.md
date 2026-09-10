@@ -7,7 +7,7 @@ Installation
 ------------
 
 ``` sh
-meteor add gwendall:impersonate
+meteor add orderlion:impersonate
 ```
 
 DOM helpers

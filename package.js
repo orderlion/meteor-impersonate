@@ -1,8 +1,8 @@
 Package.describe({
-  name: "twisterking:impersonate",
+  name: "orderlion:impersonate",
   summary: "Impersonate users in Meteor",
   version: "0.4.0",
-  git: "https://github.com/gwendall/meteor-impersonate.git",
+  git: "https://github.com/orderlion/meteor-impersonate.git",
 });
 
 Package.onUse(function (api, where) {
